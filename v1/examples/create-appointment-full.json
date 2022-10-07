@@ -1,0 +1,152 @@
+{
+  "create": {
+    "id": "h387afy7-AFA0-4AEF64030082",
+    "tenantId": "h387afy7",
+    "fhirid": "AFA0-4AEF64030082",
+    "resourceVersion": "129837",
+    "identifiers": [],
+    "roninAppointmentStatus": "cancelled",
+    "status": "cancelled",
+    "cancelationReason": {
+      "emrText": "Provider: Personal",
+      "coding": [
+        {
+          "code": "prov-pers",
+          "system": "http://terminology.hl7.org/CodeSystem/appointment-cancellation-reason",
+          "display": "Provider: Personal"
+        }
+      ]
+    },
+    "serviceCategory": [
+      {
+        "emrText": "General Practice",
+        "coding": [
+          {
+            "code": "gp",
+            "system": "http://example.org/service-category",
+            "display": "General Practice"
+          }
+        ]
+      }
+    ],
+    "serviceType": [
+      {
+        "emrText": "Gerneral Discussion",
+        "coding": [
+          {
+            "code": "52",
+            "display": "General Discussion",
+            "system": "IS THIS REQUIRED?????" 
+          }
+        ]
+      }
+    ],
+    "specialty": [
+      {
+        "emrText": "General practice",
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "394814009",
+            "display": "General practice"
+          }
+        ]
+      }
+    ],
+    "appointmentType": {
+      "emrText": "A follow up visit from a previous appointment",
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/v2-0276",
+          "code": "FOLLOWUP",
+          "display": "A follow up visit from a previous appointment"
+        }
+      ]
+    },
+    "reasonCode": [
+    ],
+    "reasonReference": [
+      {
+        "reference": "Condition/h387afy7-4B50-B161-FDC7E305E29F",
+        "resource": {
+          "type": "Condition",
+          "id": "h387afy7-4B50-B161-FDC7E305E29F"
+        }
+      }
+    ],
+    "priority": 1,
+    "description": "Discussion on the results of your recent MRI",
+    "supportingInformation": [
+    ],
+    "start": "2022-10-13T16:00:00Z",
+    "end": "2022-10-13T16:45:00Z",
+    "minutesDuration": 45,
+    "slot": [
+      
+    ],
+    "created": "2022-09-29T16:46:14",
+    "comment": "Further expand on the results of the MRI and determine the next actions that may be appropriate.",
+    "patientInstruction": "Arrive 10 minutes early",
+    "basedOn":  [
+      {
+        "reference": "ServiceRequest/h387afy7-4B50-B161-FDC7E305E29F"
+      }
+    ],
+    "participant": [
+      {
+        "actor": {
+          "reference": "Patient/h387afy7-3D40-4B5D-BB8C-7779C4BFB5A0",
+          "resource": {
+            "type": "Patient",
+            "id": "h387afy7-3D40-4B5D-BB8C-7779C4BFB5A0"
+          },
+          "display": "Patty Demo"
+        },
+        "required": "required",
+        "status": "accepted"
+      },
+      {
+        "type": [
+          {
+            "emrText": "attender",
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+                "code": "ATND",
+                "display": "attender"
+              }
+            ]
+          }
+        ],
+        "actor": {
+          "reference": "Practitioner/h387afy7-78273478",
+          "resource": {
+            "type": "Practitioner",
+            "id": "h387afy7-78273478"
+          },
+          "display": "Dr Steven Strange"
+        },
+        "required": "required",
+        "status": "accepted"
+      },
+      {
+        "actor": {
+          "reference": "Location/h387afy7-4C4E-ABD3-E5F48A28C377",
+          "resource": {
+            "type": "Location",
+            "id": "4C4E-ABD3-E5F48A28C377"
+          },
+          "display": "Half a block down the street from Jerry's Bait Shop (you know the place)"
+        },          
+        "required": "required",
+        "status": "accepted"
+      }
+    ],
+    "requestedPeriod": {
+      "start": "2022-09-29T00:00:00Z",
+      "end": "2022-10-12T00:00:00Z"
+    },
+    "createdAt": "2022-09-29T16:46:14Z",
+    "updatedAt": "2022-09-29T16:46:14Z"
+  }
+}
