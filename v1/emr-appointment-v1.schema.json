@@ -50,25 +50,9 @@
           "description": "The specific version of the system where the code is defined",
           "type": "string"
         }
-      },
-      "required": ["system", "code", "display"]
-    },
-    "codeableConcept": {
-      "type": "object",
-      "properties": {
-        "coding": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/coding"
-          },
-          "minItems": 1
-        },
-        "text": {
-          "type": "string"
-        }
       }
     },
-    "roninCodeableConcept": {
+    "codeableConcept": {
       "type":"object",
       "description": "This is a CodeableConcept with an extracted emrText attribute that dictates the correct value to repsent in an EMR context.",
       "properties": {
@@ -86,8 +70,7 @@
           },
           "minItems": 1
         }
-      },
-      "required": ["emrText", "coding"]
+      }
     },
     "roninValueCode": {
       "type": "object",
@@ -104,16 +87,14 @@
         }
       }
     },
-    "datePeriod": {
+    "period": {
       "type": "object",
       "properties": {
         "start": {
-          "type": "string",
-          "format": "date"
+          "type": "string"
         },
         "end": {
-          "type": "string",
-          "format": "date"
+          "type": "string"
         }
       },
       "required": ["start", "end"]
@@ -160,7 +141,8 @@
           "type": "string"
         },
         "period": {
-          "$ref": "#/$defs/datePeriod"
+          "$ref": "#/$defs/period",
+          "description": "Dates when the address was in use. Expected to be a date or a parital date"
         }
       }
     },
@@ -301,7 +283,7 @@
         "relationship": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/roninCodeableConcept"
+            "$ref": "#/$defs/codeableConcept"
           }
         },
         "name": {
@@ -323,7 +305,8 @@
           "$ref": "#/$defs/resourceReference"
         },
         "period": {
-          "$ref": "#/$defs/datePeriod"
+          "$ref": "#/$defs/period",
+          "description": "Dates when the contact was in use. Expected to be a date or a parital date"
         }
       }
     },
@@ -364,8 +347,8 @@
           }
         },
         "period": {
-          "$ref": "#/$defs/datePeriod",
-          "description": "Time period when the name was in use"
+          "$ref": "#/$defs/period",
+          "description": "Time period when the name was in use. Expected to be a date or partial date"
         }
       },
       "required": ["family", "given"]
@@ -376,7 +359,7 @@
         "type": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/roninCodeableConcept"
+            "$ref": "#/$defs/codeableConcept"
           }
         },
         "actor": {
@@ -426,33 +409,33 @@
           "description": "This is the EMR Appointment Status"
         },
         "cancelationReason": {
-          "$ref": "#/$defs/roninCodeableConcept"
+          "$ref": "#/$defs/codeableConcept"
         },
         "serviceCategory": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/roninCodeableConcept"
+            "$ref": "#/$defs/codeableConcept"
           }
         },
         "serviceType": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/roninCodeableConcept"
+            "$ref": "#/$defs/codeableConcept"
           }
         },
         "specialty": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/roninCodeableConcept"
+            "$ref": "#/$defs/codeableConcept"
           }
         },
         "appointmentType": {
-          "$ref": "#/$defs/roninCodeableConcept"
+          "$ref": "#/$defs/codeableConcept"
         },
         "reasonCode": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/roninCodeableConcept"
+            "$ref": "#/$defs/codeableConcept"
           }
         },
         "reasonReference": {
