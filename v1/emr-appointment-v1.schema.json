@@ -54,7 +54,7 @@
     },
     "codeableConcept": {
       "type":"object",
-      "description": "This is a CodeableConcept with an extracted emrText attribute that dictates the correct value to repsent in an EMR context.",
+      "description": "This is a CodeableConcept with an extracted emrText attribute that dictates the correct value to represent in an EMR context.",
       "properties": {
         "emrText": {
           "type": "string"
@@ -96,22 +96,7 @@
         "end": {
           "type": "string"
         }
-      },
-      "required": ["start", "end"]
-    },
-    "dateTimePeriod": {
-      "type": "object",
-      "properties": {
-        "start": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "end": {
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "required": ["start", "end"]
+      }
     },
     "address": {
       "type": "object",
@@ -142,7 +127,7 @@
         },
         "period": {
           "$ref": "#/$defs/period",
-          "description": "Dates when the address was in use. Expected to be a date or a parital date"
+          "description": "Dates when the address was in use. Expected to be a date or a partial date"
         }
       }
     },
@@ -373,7 +358,7 @@
           "type": "string"
         },
         "period": {
-          "$ref": "#/$defs/dateTimePeriod",
+          "$ref": "#/$defs/period",
           "description": "participation period of the participant"
         }
       },
@@ -497,7 +482,7 @@
           "minItems": 1
         },
         "requestedPeriod": {
-          "$ref": "#/$defs/dateTimePeriod"
+          "$ref": "#/$defs/period"
         },
         "createdAt": {
           "type": "string",
