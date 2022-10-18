@@ -5,7 +5,10 @@
     "fhirid": "AFA0-4AEF64030082",
     "resourceVersion": "129837",
     "identifiers": [],
-    "roninAppointmentStatus": "cancelled",
+    "sourceAppointmentStatus": {
+      "code": "cancelled",
+      "system": "????"
+    },
     "status": "cancelled",
     "cancelationReason": {
       "emrText": "Provider: Personal",

@@ -72,21 +72,6 @@
         }
       }
     },
-    "roninValueCode": {
-      "type": "object",
-      "properties": {
-        "emrText": {
-          "type": "string"
-        },
-        "url": {
-          "type": "string",
-          "format": "uri"
-        },
-        "valueCode": {
-          "type": "string"
-        }
-      }
-    },
     "period": {
       "type": "object",
       "properties": {
@@ -103,6 +88,14 @@
       "properties": {
         "use": {
           "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "distinguishes between postal and residence or both"
+        },
+        "text": {
+          "type": "string",
+          "description": "display string of the address"
         },
         "line": {
           "type": "array",
@@ -145,6 +138,15 @@
         "use": {
           "type": "string",
           "description": "The original use definition in the EMR"
+        },
+        "rank": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The preferred order of use"
+        },
+        "period": {
+          "$ref": "#/$defs/period",
+          "description": "Time period when the contact was in use."
         }
       },
       "required": ["value"]
@@ -154,11 +156,11 @@
       "properties": {
         "system": {
           "type": "string",
-          "description": "The original system defined by the EMR"
+          "description": "Normalized system"
         },
-        "roninSystem": {
-          "type": "string",
-          "description": "Ronin's normalized system"
+        "originalSystem": {
+          "$ref": "#/$defs/coding",
+          "description": "Original system value from the EMR"
         },
         "value": {
           "type": "string",
@@ -166,11 +168,20 @@
         },
         "use": {
           "type": "string",
-          "description": "The original use definition in the EMR"
+          "description": "Normalized use"
         },
-        "roninUse": {
-          "type": "string",
-          "description": "Ronin's normalized system"
+        "originalUse": {
+          "$ref": "#/$defs/coding",
+          "description": "Original use value from the EMR"
+        },
+        "rank": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The preferred order of use"
+        },
+        "period": {
+          "$ref": "#/$defs/period",
+          "description": "Time period when the contact was in use."
         }
       },
       "required": ["value"]
@@ -335,8 +346,7 @@
           "$ref": "#/$defs/period",
           "description": "Time period when the name was in use. Expected to be a date or partial date"
         }
-      },
-      "required": ["family", "given"]
+      }
     },
     "participant": {
       "type": "object",
@@ -385,13 +395,13 @@
             "$ref": "#/$defs/identifier"
           }
         },
-        "roninAppointmentStatus": {
-          "type": "string",
-          "description": "This is Ronin's normalized Appointment Status"
+        "sourceAppointmentStatus": {
+          "$ref": "#/$defs/coding",
+          "description": "This is the originally obtained appointment status from the EMR"
         },
         "status": {
           "type": "string",
-          "description": "This is the EMR Appointment Status"
+          "description": "This is the normalized appointment status"
         },
         "cancelationReason": {
           "$ref": "#/$defs/codeableConcept"
@@ -430,7 +440,8 @@
           }
         },
         "priority": {
-          "type": "integer"
+          "type": "integer",
+          "minimum": 0
         },
         "description": {
           "type": "string"
@@ -450,7 +461,8 @@
           "format": "date-time"
         },
         "minutesDuration": {
-          "type": "integer"
+          "type": "integer",
+          "minimum": 0
         },
         "slot": {
           "type": "array",
@@ -459,8 +471,7 @@
           }
         },
         "created": {
-          "type": "string",
-          "format": "date-time"
+          "type": "string"
         },
         "comment": {
           "type": "string"
@@ -499,7 +510,7 @@
         "fhirid",
         "resourceVersion", 
         "status", 
-        "roninAppointmentStatus", 
+        "sourceAppointmentStatus", 
         "participant",
         "createdAt", 
         "updatedAt"
