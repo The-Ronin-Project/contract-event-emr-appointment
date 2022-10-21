@@ -59,10 +59,6 @@
         "emrText": {
           "type": "string"
         },
-        "url": {
-          "type": "string",
-          "format": "uri"
-        },
         "coding": {
           "type": "array",
           "items": {
