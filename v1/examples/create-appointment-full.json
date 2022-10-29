@@ -145,10 +145,12 @@
         "status": "accepted"
       }
     ],
-    "requestedPeriod": {
-      "start": "2022-09-29T00:00:00Z",
-      "end": "2022-10-12T00:00:00Z"
-    },
+    "requestedPeriod": [
+      {
+        "start": "2022-09-29T00:00:00Z",
+        "end": "2022-10-12T00:00:00Z"
+      }
+    ],
     "createdAt": "2022-09-29T16:46:14Z",
     "updatedAt": "2022-09-29T16:46:14Z"
   }

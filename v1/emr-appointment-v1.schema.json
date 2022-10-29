@@ -489,7 +489,11 @@
           "minItems": 1
         },
         "requestedPeriod": {
-          "$ref": "#/$defs/period"
+          "type": "array",
+          "description": "Potential date/time interval(s) requested to allocate the appointment within",
+          "items": {
+            "$ref": "#/$defs/period"
+          }
         },
         "createdAt": {
           "type": "string",
