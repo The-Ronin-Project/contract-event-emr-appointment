@@ -1,0 +1,520 @@
+{
+  "$id": "https://github.com/projectronin/contract-event-emr-appointment/v1/emr-appointment-v1.schema.json",
+  "title": "EMR Appointment",
+  "description": "An appointment resource from the EMR",
+  "type": "object",
+  "properties": {
+    "create": {
+      "$ref": "#/$defs/appointment",
+      "description": "This represents an event when a new Appointment is created"
+    },
+    "update": {
+      "$ref": "#/$defs/appointment",
+      "description": "This represents an event when an Appointment is updated"
+    },
+    "delete": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "tenantId", "deletedAt"]
+    }
+  },
+  "$defs":  {
+   "coding": {
+      "type": "object",
+      "description": "This defines the required attributed for a FHIR code",
+      "properties": {
+        "system": {
+          "description": "The coding system that defines what the code represents",
+          "type": "string"
+        },
+        "code": {
+          "description": "The specific code determined by the system that specifies the value.",
+          "type": "string"
+        },
+        "display": {
+          "description": "The human readable value for the code",
+          "type": "string"
+        },
+        "version": {
+          "description": "The specific version of the system where the code is defined",
+          "type": "string"
+        }
+      }
+    },
+    "codeableConcept": {
+      "type":"object",
+      "description": "This is a CodeableConcept with an extracted emrText attribute that dictates the correct value to represent in an EMR context.",
+      "properties": {
+        "emrText": {
+          "type": "string"
+        },
+        "coding": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/coding"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "period": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string"
+        },
+        "end": {
+          "type": "string"
+        }
+      }
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "use": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "distinguishes between postal and residence or both"
+        },
+        "text": {
+          "type": "string",
+          "description": "display string of the address"
+        },
+        "line": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "city": {
+          "type": "string"
+        },
+        "district": {
+          "type": "string"
+        },
+        "state": {
+          "type":"string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "period": {
+          "$ref": "#/$defs/period",
+          "description": "Dates when the address was in use. Expected to be a date or a partial date"
+        }
+      }
+    },
+    "contactPoint": {
+      "type": "object",
+      "properties": {
+        "system": {
+          "type": "string",
+          "description": "The original system defined by the EMR"
+        },
+        "value": {
+          "type": "string",
+          "description": "The actual phone number or email address"
+        },
+        "use": {
+          "type": "string",
+          "description": "The original use definition in the EMR"
+        },
+        "rank": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The preferred order of use"
+        },
+        "period": {
+          "$ref": "#/$defs/period",
+          "description": "Time period when the contact was in use."
+        }
+      },
+      "required": ["value"]
+    },
+    "roninContactPoint": {
+      "type": "object",
+      "properties": {
+        "system": {
+          "type": "string",
+          "description": "Normalized system"
+        },
+        "originalSystem": {
+          "$ref": "#/$defs/coding",
+          "description": "Original system value from the EMR"
+        },
+        "value": {
+          "type": "string",
+          "description": "The actual phone number or email address"
+        },
+        "use": {
+          "type": "string",
+          "description": "Normalized use"
+        },
+        "originalUse": {
+          "$ref": "#/$defs/coding",
+          "description": "Original use value from the EMR"
+        },
+        "rank": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The preferred order of use"
+        },
+        "period": {
+          "$ref": "#/$defs/period",
+          "description": "Time period when the contact was in use."
+        }
+      },
+      "required": ["value"]
+    },
+    "identifier": {
+      "type": "object",
+      "properties": {
+        "use": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/codeableConcept"
+        },
+        "system": {
+          "type": "string",
+          "format": "uri"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "attachment": {
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "hash": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "creation": {
+          "type": "string"
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "width": {
+          "type": "integer"
+        }
+      }
+    },
+    "resourceReference": {
+      "type": "object",
+      "properties": {
+        "resource": {
+          "type": "object",
+          "description": "When this exists, it represents a reference to an actual resource. This is derived from the data specified in `reference`.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "This is the ronin resource type"
+            },
+            "id": {
+              "type": "string",
+              "description": "This is the ronin ID for the resource"
+            }
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "The FHIR type attribute of the resource"
+        },
+        "reference": {
+          "type": "string",
+          "format": "uri-template",
+          "description": "This should refer to a `resource.type/resource.id` but could refer to an external resource"
+        },
+        "identifier": {
+          "$ref": "#/$defs/identifier"
+        },
+        "display": {
+          "type": "string"
+        }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "relationship": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/codeableConcept"
+          }
+        },
+        "name": {
+          "$ref": "#/$defs/humanName"
+        },
+        "telecom": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/contactPoint"
+          }
+        },
+        "address": {
+          "$ref": "#/$defs/address"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "organization": {
+          "$ref": "#/$defs/resourceReference"
+        },
+        "period": {
+          "$ref": "#/$defs/period",
+          "description": "Dates when the contact was in use. Expected to be a date or a parital date"
+        }
+      }
+    },
+    "humanName": {
+      "type": "object",
+      "properties": {
+        "use": {
+          "type": "string",
+          "description": "The purpose of the name"
+        },
+        "text": {
+          "type": "string",
+          "description": "Representation of the full name"
+        },
+        "family": {
+          "type": "string",
+          "description": "Family name or Surname"
+        },
+        "given": {
+          "type": "array",
+          "description": "Given names: first, middle",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prefix": {
+          "type": "array",
+          "description": "Name parts before the name",
+          "items": {
+            "type": "string"
+          }
+        },
+        "suffix": {
+          "type": "array",
+          "description": "Name parts after the name",
+          "items": {
+            "type": "string"
+          }
+        },
+        "period": {
+          "$ref": "#/$defs/period",
+          "description": "Time period when the name was in use. Expected to be a date or partial date"
+        }
+      }
+    },
+    "participant": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/codeableConcept"
+          }
+        },
+        "actor": {
+          "$ref": "#/$defs/resourceReference"
+        },
+        "required": {
+          "type": "string",
+          "description": "Whether the participant is required for the appointment"
+        },
+        "status": {
+          "type": "string"
+        },
+        "period": {
+          "$ref": "#/$defs/period",
+          "description": "participation period of the participant"
+        }
+      },
+      "required": ["status"]
+    },
+    "appointment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        },
+        "fhirid": {
+          "type": "string"
+        },
+        "resourceVersion": {
+          "type": "string"
+        },
+        "identifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          }
+        },
+        "sourceAppointmentStatus": {
+          "$ref": "#/$defs/coding",
+          "description": "This is the originally obtained appointment status from the EMR"
+        },
+        "status": {
+          "type": "string",
+          "description": "This is the normalized appointment status"
+        },
+        "cancelationReason": {
+          "$ref": "#/$defs/codeableConcept"
+        },
+        "serviceCategory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/codeableConcept"
+          }
+        },
+        "serviceType": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/codeableConcept"
+          }
+        },
+        "specialty": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/codeableConcept"
+          }
+        },
+        "appointmentType": {
+          "$ref": "#/$defs/codeableConcept"
+        },
+        "reasonCode": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/codeableConcept"
+          }
+        },
+        "reasonReference": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/resourceReference"
+          }
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "description": {
+          "type": "string"
+        },
+        "supportingInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/resourceReference"
+          }
+        },
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "minutesDuration": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "slot": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/resourceReference"
+          }
+        },
+        "created": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "patientInstruction": {
+          "type": "string"
+        },
+        "basedOn": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/resourceReference"
+          }
+        },
+        "participant": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/participant"
+          },
+          "minItems": 1
+        },
+        "requestedPeriod": {
+          "type": "array",
+          "description": "Potential date/time interval(s) requested to allocate the appointment within",
+          "items": {
+            "$ref": "#/$defs/period"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id", 
+        "tenantId",
+        "fhirid",
+        "resourceVersion", 
+        "status", 
+        "sourceAppointmentStatus", 
+        "participant",
+        "createdAt", 
+        "updatedAt"
+      ]
+    }
+  }
+}
