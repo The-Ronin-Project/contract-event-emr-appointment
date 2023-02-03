@@ -2,7 +2,7 @@
   "update": {
     "id": "h387afy7-AFA0-4AEF64030082",
     "tenantId": "h387afy7",
-    "fhirid": "AFA0-4AEF64030082",
+    "fhirId": "AFA0-4AEF64030082",
     "resourceVersion": "129837",
     "identifiers": [],
     "sourceAppointmentStatus": {

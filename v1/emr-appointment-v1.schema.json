@@ -379,7 +379,7 @@
         "tenantId": {
           "type": "string"
         },
-        "fhirid": {
+        "fhirId": {
           "type": "string"
         },
         "resourceVersion": {
@@ -505,14 +505,14 @@
         }
       },
       "required": [
-        "id", 
+        "id",
         "tenantId",
-        "fhirid",
-        "resourceVersion", 
-        "status", 
-        "sourceAppointmentStatus", 
+        "fhirId",
+        "resourceVersion",
+        "status",
+        "sourceAppointmentStatus",
         "participant",
-        "createdAt", 
+        "createdAt",
         "updatedAt"
       ]
     }
