@@ -2,7 +2,7 @@
   "create": {
     "id": "h387afy7-AFA0-4AEF64030082",
     "tenantId": "h387afy7",
-    "fhirid": "AFA0-4AEF64030082",
+    "fhirId": "AFA0-4AEF64030082",
     "resourceVersion": "129837",
     "identifiers": [],
     "sourceAppointmentStatus": {
@@ -39,7 +39,7 @@
           {
             "code": "52",
             "display": "General Discussion",
-            "system": "IS THIS REQUIRED?????" 
+            "system": "IS THIS REQUIRED?????"
           }
         ]
       }
@@ -85,7 +85,7 @@
     "end": "2022-10-13T16:45:00Z",
     "minutesDuration": 45,
     "slot": [
-      
+
     ],
     "created": "2022-09-29T16:46:14",
     "comment": "Further expand on the results of the MRI and determine the next actions that may be appropriate.",
@@ -140,7 +140,7 @@
             "id": "4C4E-ABD3-E5F48A28C377"
           },
           "display": "Half a block down the street from Jerry's Bait Shop (you know the place)"
-        },          
+        },
         "required": "required",
         "status": "accepted"
       }
